@@ -1,5 +1,5 @@
 import pygame as pg
-from constantes import ALTURA_TELA, LARGURA_TELA
+from .constantes import ALTURA_TELA, LARGURA_TELA
 
 
 class Camera:

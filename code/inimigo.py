@@ -1,6 +1,6 @@
 import math
 import pygame as pg
-from constantes import (
+from .constantes import (
     COR_BRANCO,
     COR_PRETO,
     COR_VIDA,
@@ -18,7 +18,7 @@ from constantes import (
     INIMIGO_RANGED_VIDA,
     VELOCIDADE_TERMINAL,
 )
-from projetil import Projetil
+from .projetil import Projetil
 
 
 class Inimigo:

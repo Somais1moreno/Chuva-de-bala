@@ -1,7 +1,7 @@
 import json
 import os
 from datetime import datetime
-from constantes import (
+from .constantes import (
     ARQUIVO_RANKING_NOME,
     BONUS_PERFECT_FLAWLESS,
     DIR_BASE,

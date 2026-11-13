@@ -1,9 +1,9 @@
 import os
 import sys
 import pygame as pg
-from camera import Camera
-from cenario import Nivel
-from constantes import (
+from .camera import Camera
+from .cenario import Nivel
+from .constantes import (
     ALTURA_TELA,
     BONUS_PERFECT_FLAWLESS,
     COR_BLOQUEIO,
@@ -28,9 +28,9 @@ from constantes import (
     X_ARENA_BOSS,
     obter_caminho_asset,
 )
-from jogador import Jogador
-from menu import Menu
-from score import GerenciadorScore, qualifica_para_ranking, salvar_score
+from .jogador import Jogador
+from .menu import Menu
+from .score import GerenciadorScore, qualifica_para_ranking, salvar_score
 
 
 class EstadoJogo:
@@ -205,6 +205,7 @@ class Jogo:
             self._cursor_piscada += dt
 
         elif self.estado == EstadoJogo.JOGANDO:
+            self.nivel.atualizar_caixas(dt)
             teclas = pg.key.get_pressed()
             obstaculos = self.nivel.obter_obstaculos_solidos()
 

@@ -26,7 +26,7 @@ FONTE_RETRO_ARQUIVO = "PressStart2P.ttf"
 if getattr(sys, "frozen", False):
     DIR_BASE = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(sys.executable)))
 else:
-    DIR_BASE = os.path.dirname(os.path.abspath(__file__))
+    DIR_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DIR_ASSETS = os.path.join(DIR_BASE, "Assets")
 

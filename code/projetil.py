@@ -1,6 +1,6 @@
 import math
 import pygame as pg
-from constantes import ALCANCE_MAX_BALA, COR_MUNICÃO, DANO_BALA, VELOCIDADE_BALA
+from .constantes import ALCANCE_MAX_BALA, COR_MUNICÃO, DANO_BALA, VELOCIDADE_BALA
 
 
 class Projetil:

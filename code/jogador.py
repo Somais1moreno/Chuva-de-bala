@@ -1,6 +1,6 @@
 import os
 import pygame as pg
-from constantes import (
+from .constantes import (
     ACELERACAO,
     ALCANCE_PEIXEIRA_X,
     ALCANCE_PEIXEIRA_Y,
@@ -29,7 +29,7 @@ from constantes import (
     VIDA_MAX_JOGADOR,
     obter_caminho_asset,
 )
-from projetil import Projetil
+from .projetil import Projetil
 
 
 class Jogador:

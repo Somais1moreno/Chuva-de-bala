@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 
-from entidade import Entidade
-from fase import Fase
-from jogador import Jogador
+from .modelo_fase import Entidade, Fase, Jogador
 
 
 class FabricaEntidades(ABC):

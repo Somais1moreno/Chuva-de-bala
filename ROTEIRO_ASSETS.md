@@ -12,11 +12,9 @@ Este roteiro contém o planejamento visual unificado e os **prompts prontos para
 
 ---
 
-## 📦 Inventário de Assets Reaproveitados
-- **Caixas Destrutíveis (`caixa_intacta.png`, `caixa_danificada.png`, `caixa_destruida.png`):** 3 estados de dano já recortados em canal alpha transparente.
-- **Cenários Panorâmicos de Fundo (`cenario_fase1_caatinga.png`, etc.):** Referência de atmosfera e serras.
-> *Nota: Os sprites antigos do jogador foram excluídos para garantir consistência visual total com o novo herói.*
-
+## 📦 Inventário de Assets
+- **Caixas Destrutíveis recriar em visao 2D (`caixa_intacta.png`, `caixa_danificada.png`, `caixa_destruida.png`):** 3 estados de dano já recortados em canal alpha transparente.
+- **Precisamos Recriar os 3 niveis de caixas pois foram criadas em outro anggulo de visão. vamos fazer agr, esta c
 ---
 
 ## 📋 Lista de Prompts Prontos para Cópia
@@ -92,6 +90,7 @@ Contents arranged side by side horizontally:
 5. Ammo HUD icon: single clean vertical golden revolver cartridge icon (16x32 pixel scale) for on-screen counter.
 Style: Crisp 16-bit arcade pixel art with clear outlines.
 Background: Solid pure bright magenta chroma key (#FF00FF) flat background with no shadows.
+
 ```
 
 ---

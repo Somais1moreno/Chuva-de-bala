@@ -1,19 +1,21 @@
 import os
 import pygame as pg
-from constantes import (
+from .constantes import (
     ALTURA_NIVEL_PADRAO,
     COR_CHAO_DETALHE,
     COR_CHAO_ROCHA,
     COR_CHAO_SUPERIOR,
     COR_MUNICÃO,
+    GRAVIDADE,
     LARGURA_NIVEL_PADRAO,
     MUNICAO_POR_COLETAVEL,
     TAMANHO_CAIXA,
+    VELOCIDADE_TERMINAL,
     VIDA_CAIXA,
     X_ARENA_BOSS,
     obter_caminho_asset,
 )
-from inimigo import Inimigo, InimigoAtirador, InimigoMelee
+from .inimigo import Inimigo, InimigoAtirador, InimigoMelee
 
 
 class Plataforma:
@@ -73,6 +75,8 @@ class Caixa:
 
     def __init__(self, x: int, y: int, tamanho: int = TAMANHO_CAIXA):
         self.rect = pg.Rect(x, y, tamanho, tamanho)
+        self.y = float(y)
+        self.velocidade_y = 0.0
         self.tamanho = tamanho
         self.vida = VIDA_CAIXA
         self.destruida = False
@@ -105,6 +109,49 @@ class Caixa:
             self.destruida = True
             return True
         return False
+
+    def atualizar(
+        self,
+        dt: float,
+        plataformas: list[Plataforma],
+        caixas: list["Caixa"],
+    ) -> None:
+        if self.destruida:
+            return
+
+        y_anterior = self.y
+        self.velocidade_y = min(
+            self.velocidade_y + GRAVIDADE * dt,
+            VELOCIDADE_TERMINAL,
+        )
+        y_proximo = y_anterior + self.velocidade_y * dt
+        fundo_anterior = y_anterior + self.tamanho
+        fundo_proximo = y_proximo + self.tamanho
+        topo_colisao = None
+
+        for suporte in [*plataformas, *caixas]:
+            if isinstance(suporte, Caixa) and (suporte is self or suporte.destruida):
+                continue
+            rect_suporte = suporte.rect
+            sobrepoe_horizontalmente = (
+                self.rect.right > rect_suporte.left
+                and self.rect.left < rect_suporte.right
+            )
+            caiu_sobre_suporte = (
+                fundo_anterior <= rect_suporte.top
+                and fundo_proximo >= rect_suporte.top
+            )
+            if sobrepoe_horizontalmente and caiu_sobre_suporte:
+                if topo_colisao is None or rect_suporte.top < topo_colisao:
+                    topo_colisao = rect_suporte.top
+
+        if topo_colisao is not None:
+            self.y = float(topo_colisao - self.tamanho)
+            self.velocidade_y = 0.0
+        else:
+            self.y = y_proximo
+
+        self.rect.y = round(self.y)
 
     def desenhar(self, tela: pg.Surface, camera) -> None:
         # Se estiver destruída, não desenha nada (corrige o bug do quadrado marrom)
@@ -297,6 +344,10 @@ class Nivel:
 
     def atualizar_particulas(self, dt: float):
         self.particulas = [p for p in self.particulas if p.atualizar(dt)]
+
+    def atualizar_caixas(self, dt: float) -> None:
+        for caixa in self.caixas:
+            caixa.atualizar(dt, self.plataformas, self.caixas)
 
     def desenhar_particulas(self, tela: pg.Surface, camera):
         for p in self.particulas:

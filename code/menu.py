@@ -1,7 +1,7 @@
 import math
 import os
 import pygame as pg
-from constantes import (
+from .constantes import (
     ALTURA_TELA,
     COR_BLOQUEIO,
     COR_BRANCO,
@@ -17,7 +17,7 @@ from constantes import (
     LARGURA_TELA,
     obter_caminho_asset,
 )
-from score import carregar_ranking
+from .score import carregar_ranking
 
 
 class Menu:
