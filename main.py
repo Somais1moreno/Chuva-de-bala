@@ -1,23 +1,16 @@
-import pygame as pg
+import os
+import sys
 
-pg.init()
+# Garante que o diretório do script esteja no sys.path mesmo se executado de fora
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-tela = pg.display.set_mode((1080, 720))
-pg.display.set_caption("Chuva de Balas")
-
-relogio = pg.time.Clock()
-rodando = True
+from code.jogo import Jogo
 
 
-while rodando:
-    for e in pg.event.get():
-        if e.type == pg.QUIT:
-            rodando = False
-
-    tela.fill((25, 25, 35))
-    pg.display.flip()
-    relogio.tick(60)
+def main():
+    jogo = Jogo()
+    jogo.executar()
 
 
-pg.quit()
-
+if __name__ == "__main__":
+    main()
